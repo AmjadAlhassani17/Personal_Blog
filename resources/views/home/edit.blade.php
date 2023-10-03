@@ -32,12 +32,13 @@
     {{$home->full_text}}
    </textarea>
  </div>
+ <br>
  <div class="mb-3">
-    <img src="/images/{{$home->image}}" width="200px" height="300px">
-
+    <img src="/images/{{$home->image}}" width="770px" height="300px">
+    <br>
     <input type="file" class="form-control" name="image" >
    </div>
-
+   <br>
     <div class="mb-3">
         <label for="category_id" class="form-label">Category</label>
         <select class="form-select" name="category_id">
@@ -49,6 +50,11 @@
     </div>
 
     <br>
+
+    <div class="mb-3">
+        <label for="tags" class="form-label">Tags (comma-separated)</label>
+        <input type="text" class="form-control" name="tags" placeholder="e.g., tag1, tag2, tag3" value="{{ implode(', ', $home->tags->pluck('name')->toArray()) }}">
+    </div>
 
    <button type="submit" class="btn btn-primary">Submit</button>
 

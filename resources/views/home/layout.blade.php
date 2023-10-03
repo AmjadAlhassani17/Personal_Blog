@@ -7,12 +7,12 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <link rel="icon" href="http://www.example.com/favicon.ico" type="image/x-icon">
-    <title>Hello, world!</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <link rel="icon" href="http://www.example.com/favicon.ico" type="image/x-icon">
+
+    <title>Personal Blog</title>
     <!-- main css -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -27,15 +27,15 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {{-- @auth --}}
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('home.create')}}">Create Articles</a>
-                </li>
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{route('home.create')}}">Create Articles</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('home.profileAboutme')}}">Profile About me</a>
-                </li>
-                {{-- @endauth --}}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{route('home.profileAboutme')}}">Profile About me</a>
+                    </li>
+                @endauth
 
             </ul>
 

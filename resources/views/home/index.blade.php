@@ -8,36 +8,54 @@
   <div class="alert alert-success" role="alert">
    {{$message}}
   </div>
+  <script>
+    setTimeout(function () {
+      document.getElementById('success-message').style.display = 'none';
+    }, 3000);
+  </script>
 @endif
 
-<section class="blog_area">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <div class="blog_left_sidebar">
-                    <article class="blog_style1">
-                        <div class="blog_img">
-                            <img class="img-fluid" src="{{URL('images/blog-2.jpg')}}" alt="">
-                        </div>
-                        <div class="blog_text">
-                            <div class="blog_text_inner">
-                                <div class="cat">
-                                    <a class="cat_btn">Gadgets</a>
-                                    <a><i class="fa fa-calendar" aria-hidden="true"></i> March 14, 2018</a>
-                                    <a><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
-                                </div>
-                                <a><h4>Nest Protect: 2nd Gen Smoke CO Alarm</h4></a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                                <a class="blog_btn">Read More</a>
+@foreach ($articles as $article)
+    <section class="blog_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="blog_left_sidebar">
+                        <article class="blog_style1">
+                            <div class="blog_img">
+                                <img src="/images/{{$article->image}}" width="770px" height="400px" alt="">
                             </div>
-                        </div>
-                    </article>
+                            <div class="blog_text">
+                                <div class="blog_text_inner">
+                                    <div class="cat">
+                                        @foreach ($article->tags as $tag)
+                                            <a class="cat_btn">{{ $tag->name }}</a>
+                                        @endforeach
+                                        <a><i class="fa fa-calendar" aria-hidden="true"></i>   {{ $article->created_at->format('Y-m-d H:i:s') }}</a>
+                                    </div>
+                                    <a><h4>{{$article->title}}</h4></a>
+                                    <p>{{$article->full_text}}</p>
+                                    @auth
+                                        <div class="article-actions">
+                                            <a class="blog_btn" href="{{route('home.show',$article->id)}}">Show Article</a>
+                                            <a class="blog_btn" href="{{route('home.edit',$article->id)}}">Edit Article</a>
+                                            <form action="{{route('home.destroy',$article->id)}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete Article</button>
+                                            </form>
+                                        </div>
+                                    @endauth
+                                </div>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </div>
+            {!!  $articles->links()   !!}
         </div>
-    </div>
-</section>
-
+    </section>
+@endforeach
 
 
 

@@ -16,14 +16,14 @@ use App\Http\Controllers\AritcleController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect()->route('home.index');
 });
 
 Route::get('/dashboard', function () {
     return view('home.layout');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::resource('/aritcles', AritcleController::class);
 Route::get('home/profileAboutme', [AritcleController::class, 'profileAboutme'])->name('home.profileAboutme');
 Route::resource('home', AritcleController::class);
 

@@ -114,6 +114,17 @@ class AritcleController extends Controller
         }
 
         $home->update($input);
+
+        $tagsInput = $request->input('tags');
+        $tagsArray = explode(',', $tagsInput);
+
+        $home->tags()->detach();
+
+        foreach ($tagsArray as $tagName) {
+            $tag = Tag::firstOrCreate(['name' => trim($tagName)]);
+            $home->tags()->attach($tag->id);
+        }
+
         return redirect()->route('home.index')->with('success', 'Article updated successfully');
 
     }
